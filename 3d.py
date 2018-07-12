@@ -11,7 +11,7 @@ import numpy as np
 import imageio
 
 def three_d():
-    global frames
+    frames = []
     z = list(np.arange(.1, 2.0, 0.02)) + list(reversed(np.arange(.11, 2.0, 0.02)))
     for g in z:
         print(g)
@@ -30,8 +30,8 @@ def three_d():
         plt.close(fig)
         plt.close('all')
         frames.append(image)
+    return frames
 
-frames = []
-three_d()
+frames = three_d()
 imageio.mimsave('image.gif', frames, fps=30)
 
