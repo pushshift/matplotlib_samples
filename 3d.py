@@ -12,19 +12,18 @@ import imageio
 
 def three_d():
     frames = []
-    z = list(np.arange(.1, 2.0, 0.02)) + list(reversed(np.arange(.11, 2.0, 0.02)))
-    for g in z:
-        print(g)
+    anim_list = list(np.arange(.1, 2.0, 0.02)) + list(reversed(np.arange(.11, 2.0, 0.02)))
+    for i in anim_list:
         fig = plt.figure()
         ax = Axes3D(fig)
         X = np.arange(-4, 4, 0.15)
         Y = np.arange(-4, 4, 0.15)
         X, Y = np.meshgrid(X, Y)
         R = np.sqrt(X ** 2 + Y ** 2)
-        Z = np.sin(R+g)*g
+        Z = np.sin(R+i)*i
         ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.cm.hot)
         ax.set_zlim(-2, 2)
-        fig.canvas.draw()       # draw the canvas, cache the renderer
+        fig.canvas.draw() # draw the canvas, cache the renderer
         image = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8')
         image  = image.reshape(fig.canvas.get_width_height()[::-1] + (3,))
         plt.close(fig)
